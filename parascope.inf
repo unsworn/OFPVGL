@@ -1,0 +1,71 @@
+;
+; Windows USB CDC Driver Setup File for Parascope (XP/2000)
+;
+;	(c) Copyright 2008 el-ljud.se
+;
+
+[Version] 
+Signature	= "$Windows NT$"
+Provider	= %COMPANY%
+DriverVer	= 06/28/2008,1.0.2.0
+
+Class		= Ports
+ClassGuid	= {4D36E978-E325-11CE-BFC1-08002BE10318}
+
+[Manufacturer] 
+%MFGNAME%	= Devices,NT,NTamd64
+
+;--------------------------------------------------------------------------
+; Files
+;--------------------------------------------------------------------------
+
+[DestinationDirs]
+DefaultDestDir	= 12
+
+;--------------------------------------------------------------------------
+; Device driver
+;--------------------------------------------------------------------------
+
+[PARASCOPE_DEV.NT]
+Include	= mdmcpq.inf
+CopyFiles	= FakeModemCopyFileSection
+AddReg		= PARASCOPE_DEV.NT.AddReg
+
+[PARASCOPE_DEV.NT.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,usbser.sys
+HKR,,EnumPropPages32,,"MsPorts.dll,SerialPortPropPageProvider"
+
+[PARASCOPE_DEV.NT.Services]
+AddService=usbser, 0x00000002, parascope_add_service
+
+;--------------------------------------------------------------------------
+; Services
+;--------------------------------------------------------------------------
+
+[parascope_add_service]
+DisplayName	= %SERVICE%
+ServiceType	= 1
+StartType	= 3
+ErrorControl	= 1
+ServiceBinary	= %12%\usbser.sys 
+
+;--------------------------------------------------------------------------
+; Devices
+;--------------------------------------------------------------------------
+
+[Devices.NT]
+%DESCRIPTION%	= PARASCOPE_DEV, USB\VID_16C0&PID_05E1
+
+[Devices.NTamd64]
+%DESCRIPTION%	= PARASCOPE_DEV, USB\VID_16C0&PID_05E1
+
+;--------------------------------------------------------------------------
+; Strings
+;--------------------------------------------------------------------------
+
+[Strings] 
+COMPANY	= "el-ljud.se"
+MFGNAME	= "www.el-ljud.se"
+DESCRIPTION	= "Parascope USB Interface"
+SERVICE	= "USB RS-232 Emulation Driver"

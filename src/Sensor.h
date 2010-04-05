@@ -1,3 +1,7 @@
+#ifndef Sensor_H_
+#define Sensor_H_
+
+class PSerial;
 
 class Sensor
 {
@@ -7,7 +11,8 @@ public:
         kButtonPreview,
         kButtonNext,
         kButtonInfo,
-        kButtonZoom
+        kButtonZoom,
+        kNumButtons
     };
     
     
@@ -31,5 +36,22 @@ public:
     bool IsButtonPressed(ButtonState button);
         
 private:
-    explicit Sensor();
+
+    explicit Sensor(PSerial* device);
+
+    void Parse(char* buf);
+    
+    PSerial* fDevice;
+
+    float fPos;
+    float fTilt;
+
+    bool  fCPos;
+    bool  fCTilt;
+    bool  fCButton;
+    
+    int   fButton[kNumButtons];
+
 };
+
+#endif
