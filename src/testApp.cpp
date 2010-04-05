@@ -1,6 +1,5 @@
 #include "testApp.h"
 
-
 //--------------------------------------------------------------
 void testApp::setup(){
 
@@ -21,6 +20,9 @@ void testApp::setup(){
 	ofSetVerticalSync(true);
 	// also, frame rate:
 	ofSetFrameRate(60);
+	
+    sensor = Sensor::Create();
+    
 }
 
 //--------------------------------------------------------------
@@ -42,6 +44,10 @@ void testApp::update(){
 	//update the spin -which is storing the
 	//total rotation- by spinPct
 	spin	+= spinPct;
+	
+	if (sensor != NULL)
+        sensor->Poll();
+                
 }
 
 //--------------------------------------------------------------
@@ -49,6 +55,12 @@ void testApp::draw(){
 	ofSetupScreen();
 
 
+    if (NULL == sensor)
+        return ;
+        
+    if (!sensor->HasChanged())
+        return ;
+    
 	//Lets enable blending!
 	//We are going to use a blend mode that adds
 	//all the colors to white.

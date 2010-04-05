@@ -3,11 +3,12 @@
 
 
 #include "ofMain.h"
+#include "Sensor.h"
 
 class testApp : public ofBaseApp{
 	
 	public:
-		
+        
 		void setup();
 		void update();
 		void draw();
@@ -26,6 +27,8 @@ class testApp : public ofBaseApp{
 		int		prevMX;
 		int		prevMY;
 		bool 	bFirstMouseMove;
+		
+        Sensor* sensor;
 };
 
 #endif	
