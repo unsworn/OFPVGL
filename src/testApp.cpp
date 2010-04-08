@@ -1,30 +1,128 @@
 #include "testApp.h"
 
-//--------------------------------------------------------------
-void testApp::setup(){
+using namespace std;
 
-	counter = 0.0;
-	spin	= 0.0;
-	spinPct	= 0.0;
-	mouseX  = 263;
-	mouseY  = 267;
-	bFirstMouseMove = true;
-
-	//set background to black
-	ofBackground(0, 0, 0);
-
-	//lets make our circles look a little nicer!
-	ofSetCircleResolution(40);
+void testApp::setup()
+{
+	ofBackground(20, 20, 20);
 
 	//for smooth animation, set vertical sync if we can
-	ofSetVerticalSync(true);
+	// ofSetVerticalSync(true);
 	// also, frame rate:
-	ofSetFrameRate(60);
-	
-    sensor = Sensor::Create();
-    
+	// ofSetFrameRate(60);
+
+
+    // do not use ARB textures, this way it is easier to use the GLU objects
+    ofDisableArbTex();
+    img.loadImage("tri_tb_2048x512.jpg");    // ska vara "tri_tb_8000x2000" men det vill sig inte
+    //img.loadImage("tri_tb_4096x1024.jpg");    // ska vara "tri_tb_8000x2000" men det vill sig inte
+	ofEnableArbTex();
+
+	rotation = 0;
+
+	sensor = Sensor::Create();
 }
 
+void testApp::update()
+{
+    // do sensor polling here
+    if (sensor != NULL)
+    {
+        sensor->Poll();
+    }
+    else
+        cout << "Sensor is NULL" << endl;
+}
+void testApp::draw()
+{
+    if (sensor == NULL)
+        return ;
+
+    float tilt = sensor->ReadTilt();
+    float pan = sensor->ReadPan();
+
+    // cout << "Tilt: " << (int)tilt << " Pan: " <<  (int)pan << endl;
+
+    glBegin(GL_LINES);
+        glVertex2f(0,0);
+        glVertex2f(1024,600);
+    glEnd();
+
+    /*
+    if (!sensor->HasChanged())
+        return ;
+    */
+
+
+    // draw the cylinder in the center of the screen, and since it is 300 units high, translate it 150 units downward
+    ofTranslate(ofGetWidth() / 2, ofGetHeight() / 2 - 150, 300);
+
+    // make sure it is facing us the right way and then let it rotate
+    ofRotateX(90.0f);
+    ofRotateY(180.0f);
+    //ofRotateZ(ofGetElapsedTimef() * -10.0f);
+	ofRotateZ(pan);
+
+    // create a new quadric to hold our cylinder
+    GLUquadric* quad = gluNewQuadric();
+
+    // tell GLU how to create the cylinder
+    gluQuadricNormals(quad, GLU_SMOOTH);
+    gluQuadricDrawStyle(quad, GLU_FILL);
+    gluQuadricTexture(quad, GL_TRUE);
+    gluQuadricOrientation(quad, GLU_INSIDE);
+
+    // enable depth test, so we only see the front
+    glEnable(GL_DEPTH_TEST);
+
+    // use our texture to draw the cylinder
+    img.getTextureReference().bind();
+
+    // draw a cylinder with radius 300, 300 pixels high,
+    // using 180 slices (that's a LOT, but looks very smooth)
+    // gluCylinder(
+    // void gluCylinder	(	GLUquadric* quad , GLdouble base , GLdouble top , GLdouble height , GLint slices , GLint stacks );
+
+    gluCylinder(quad, 300, 300, 300, 180, 1);
+
+    // stop using our texture
+    img.getTextureReference().unbind();
+
+    // delete the cylinder from memory
+    gluDeleteQuadric(quad);
+    //*/
+}
+
+void testApp::keyReleased(int key)
+{
+	switch(key)
+	{
+		case OF_KEY_LEFT:
+			rotation--;
+			break;
+		case OF_KEY_RIGHT:
+			// rotate right
+			rotation++;
+			break;
+		case OF_KEY_RETURN:
+			cout << "framerate: " << ofGetFrameRate() << std::endl;
+			cout << "key: " << key << endl;
+
+			GLint texSize;
+			glGetIntegerv(GL_MAX_TEXTURE_SIZE, &texSize);
+			cout << "GL_MAX_TEXTURE_SIZE: " << texSize << endl;
+			cout << "rotation: " << rotation << endl;
+
+			break;
+        case OF_KEY_ESC:
+            OF_EXIT_APP(1);
+            break;
+
+	}
+}
+
+
+/*
 //--------------------------------------------------------------
 void testApp::update(){
 
@@ -44,10 +142,10 @@ void testApp::update(){
 	//update the spin -which is storing the
 	//total rotation- by spinPct
 	spin	+= spinPct;
-	
+
 	if (sensor != NULL)
         sensor->Poll();
-                
+
 }
 
 //--------------------------------------------------------------
@@ -57,10 +155,10 @@ void testApp::draw(){
 
     if (NULL == sensor)
         return ;
-        
+
     if (!sensor->HasChanged())
         return ;
-    
+
 	//Lets enable blending!
 	//We are going to use a blend mode that adds
 	//all the colors to white.
@@ -261,4 +359,4 @@ void testApp::mouseReleased(int x, int y, int button){
 void testApp::windowResized(int w, int h){
 
 }
-
+*/

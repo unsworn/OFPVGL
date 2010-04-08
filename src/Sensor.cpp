@@ -1,5 +1,4 @@
 #include "ofSerial.h"
-
 #include "Sensor.h"
 
 //------------------------------------------------------------------------------------------------------------
@@ -26,7 +25,7 @@ shiftin(unsigned char* buf, int len, int c)
         buf[i] = buf[i+1];
 
     return (buf[len] = c);
-    
+
 }
 
 //------------------------------------------------------------------------------------------------------------
@@ -36,7 +35,7 @@ class PSerial : public ofSerial
 public:
     PSerial() : ofSerial(), fSelectedPort(NULL)
     {}
-    
+
     virtual ~PSerial()
     {
         if (NULL != fSelectedPort)
@@ -52,7 +51,7 @@ public:
     {
         return fSelectedPort;
     }
-    
+
     bool SelectPort()
     {
 
@@ -61,7 +60,7 @@ public:
         int i = 0;
         int nPorts = 0;
         DWORD dataType, actualSize = 0;
-        
+
         unsigned char dataBuf[MAX_PATH + 1];
 
         char* portName;
@@ -73,7 +72,7 @@ public:
 
 
         fSelectedPort = NULL;
-        
+
         // Search device set
         hDevInfo = SetupDiGetClassDevs((struct _GUID *)&GUID_SERENUM_BUS_ENUMERATOR,0,0,DIGCF_PRESENT);
 
@@ -95,7 +94,7 @@ public:
                                                      &actualSize))
                 {
 
-                    
+
 
                     if (strstr((char*)dataBuf, SNAME) != NULL)
                     {
@@ -114,21 +113,21 @@ public:
                         (*end) = '\0';
 
                         fSelectedPort = strdup(portName);
-                        
+
                     }
 
                 }
                 i++;
             }
         }
-        
+
         SetupDiDestroyDeviceInfoList(hDevInfo);
 
         return IsPortSelected();
-        
+
     }
 
-    
+
 private:
     char* fSelectedPort;
 };
@@ -175,9 +174,9 @@ Sensor::Poll()
 {
 
     int l;
-    
+
     static unsigned char buf[15];
-    
+
     while (fDevice->available())
     {
         l= shiftin(buf, 15, fDevice->readByte());
@@ -205,9 +204,9 @@ Sensor::HasChanged()
 //------------------------------------------------------------------------------------------------------------
 
 float
-Sensor::ReadPos()
+Sensor::ReadPan()
 {
-    return fPos;
+    return fPan;
 }
 
 //------------------------------------------------------------------------------------------------------------
@@ -225,7 +224,7 @@ Sensor::IsButtonPressed(ButtonState button)
 {
     if ( button >= kNumButtons)
         return false;
-    
+
     return (fButton[ button ] != 0);
 }
 
@@ -237,7 +236,7 @@ Sensor::Parse(char* buf)
     static float xlast = 0;
     static float ylast = 0;
     static int   blast = 0;
-    
+
     float xtmp = 0;
     float ytmp = 0;
     int   btmp = 0;
@@ -248,8 +247,8 @@ Sensor::Parse(char* buf)
     fButton[ kButtonNext    ] = (btmp&0x02);
     fButton[ kButtonInfo    ] = (btmp&0x04);
     fButton[ kButtonZoom    ] = (btmp&0x08);
-    
-    fPos  = xtmp;
+
+    fPan  = xtmp;
     fTilt = ytmp;
 
     xlast = xtmp;

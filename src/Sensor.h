@@ -6,7 +6,7 @@ class PSerial;
 class Sensor
 {
 public:
-    
+
     enum ButtonState {
         kButtonPreview,
         kButtonNext,
@@ -14,42 +14,42 @@ public:
         kButtonZoom,
         kNumButtons
     };
-    
-    
+
+
     enum PollState {
         kPollSuccess,
         kPollError
     };
-    
+
     virtual ~Sensor();
-          
+
     static Sensor* Create();
-    
+
     PollState Poll();
-    
+
     bool HasChanged();
-    
-    float ReadPos();
+
+    float ReadPan();
 
     float ReadTilt();
-    
+
     bool IsButtonPressed(ButtonState button);
-        
+
 private:
 
     explicit Sensor(PSerial* device);
 
     void Parse(char* buf);
-    
+
     PSerial* fDevice;
 
-    float fPos;
+    float fPan;
     float fTilt;
 
-    bool  fCPos;
+    bool  fCPan;
     bool  fCTilt;
     bool  fCButton;
-    
+
     int   fButton[kNumButtons];
 
 };
