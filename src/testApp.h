@@ -1,9 +1,9 @@
 #ifndef _TEST_APP
 #define _TEST_APP
 
-
 #include "ofMain.h"
 #include "Sensor.h"
+#include "ofxXMLSettings.h"
 
 class testApp : public ofBaseApp{
 
@@ -27,6 +27,7 @@ class testApp : public ofBaseApp{
 
 		float pan;
 		float tilt;
+		float zoom;
 		float x, y, z;        // only for testing purposes
 
 		void keyReleased(int key);
@@ -34,29 +35,19 @@ class testApp : public ofBaseApp{
 		void mouseReleased(int x, int y, int button);
 
 		bool test;
+		//ButtonState button;
+
+
+    //////////////////////////////////////////////////////////
 
     private:
 
+        ofxXmlSettings xml;
+
+        void drawReferenceLines();
         void drawCylinder();
+        void autoRotate();
 
-
-		/*
-		void keyPressed(int key);
-		void keyReleased(int key);
-		void mouseMoved(int x, int y );
-		void mouseDragged(int x, int y, int button);
-
-		void mouseReleased(int x, int y, int button);
-		void windowResized(int w, int h);
-
-		float 	counter;
-		float	spin;
-		float	spinPct;
-		int		prevMX;
-		int		prevMY;
-		bool 	bFirstMouseMove;
-
-        */
 };
 
 #endif

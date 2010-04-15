@@ -10,29 +10,39 @@ using namespace std;
 #define CYLINDER_SLICES     32
 #define CYLINDER_STACKS     1
 
+#define ZOOM_OFFSET         100
 #define VIEWPORT_HEIGHT     450
 
+int dir = 1;
+
 //------------------------------------------------------------------------------------------------------------
-void testApp::setup()
+void
+testApp::setup()
 {
-	ofBackground(20, 20, 20);
+	ofBackground(0, 0, 0);
+
+    // load settings
+	if(!xml.loadFile("settings.xml"))
+        printf("Couldn't load XML settings!");
+    panOffset = xml.getValue("PVGL:PANOFFSET", 0);      // 0 is default value if settings file doesn't exist
+    tiltOffset = xml.getValue("PVGL:TILTOFFSET", 0);
+    viewportVerticalOffset = xml.getValue("PVGL:VIEVPORTVERTICALOFFSET", 0);    // not implemented yet
+
+    printf("panOffset = %f\n", panOffset);
+    printf("tiltOffset = %f\n", tiltOffset);
+    printf("viewPortVerticalOffset = %f\n", viewportVerticalOffset);
 
 	//for smooth animation, set vertical sync if we can
-	// ofSetVerticalSync(true);
-	// also, frame rate:
-	// ofSetFrameRate(60);
+	ofSetVerticalSync(true);
+	ofSetFrameRate(60);
 
-	// todo: load offset values from XML
-    panOffset = 0;
-    tiltOffset = 0;
-    viewportVerticalOffset = 0;
+    tilt = 0.0;
+    pan = 0.0;
+    zoom = 0.0;
 
-    tilt = 0;
-    pan = 0;
-
-    x = 0;
-    y = 0;
-    z = 0;
+    x = 0.0;
+    y = 0.0;
+    z = 0.0;
 
     test = false;
 
@@ -49,7 +59,8 @@ void testApp::setup()
 
 //------------------------------------------------------------------------------------------------------------
 
-void testApp::update()
+void
+testApp::update()
 {
     // do sensor polling here
     if (sensor != NULL)
@@ -59,83 +70,114 @@ void testApp::update()
         pan = sensor->ReadPan();
     }
     else
-        cout << "Sensor is NULL" << endl;
+        printf("Sensor is NULL\n");
 }
 
 //------------------------------------------------------------------------------------------------------------
 
-void testApp::draw()
+void
+testApp::draw()
 {
-    if (sensor == NULL)
-        return ;
+
+    //if (sensor == NULL)
+    //    return ;
 
     /*
     if (!sensor->HasChanged())
         return ;
     */
+    zoom = 0;
 
-ofRect(100, 100, 300, 400);
+    if (sensor->IsButtonPressed(sensor->kButtonPrev))
+    {
+        printf("PREV pressed!\n");
+    }
+    if (sensor->IsButtonPressed(sensor->kButtonNext))
+    {
+        printf("NEXT pressed!\n");
+    }
+    if (sensor->IsButtonPressed(sensor->kButtonInfo))
+    {
+        printf("INFO pressed!\n");
+    }
+    if (sensor->IsButtonPressed(sensor->kButtonZoom))
+    {
+        printf("ZOOM pressed!\n");
+        zoom = ZOOM_OFFSET;
+    }
 
-    drawCylinder();
+    ofTranslate(centerX, centerY, CYLINDER_RADIUS * 2);             // position the "camera"
+    ofTranslate(0.0, 0.0, zoom);                                    // zoom?
+    drawReferenceLines();
 
-    // draw viewport edges
-    ofSetColor(0xFF0000);
-    ofLine(0, (centerY - VIEWPORT_HEIGHT / 2) + viewportVerticalOffset, ofGetWidth(), (centerY - VIEWPORT_HEIGHT / 2) + viewportVerticalOffset);
-    ofLine(0, (centerY + VIEWPORT_HEIGHT / 2) + viewportVerticalOffset, ofGetWidth(), (centerY + VIEWPORT_HEIGHT / 2) + viewportVerticalOffset);
-
-
-}
-
-//------------------------------------------------------------------------------------------------------------
-
-void testApp::drawCylinder()
-{
     ofPushMatrix();
-
-        // draw the cylinder in the center of the screen
-//        ofTranslate(ofGetWidth() / 2, ofGetHeight() / 2 - (CYLINDER_HEIGHT / 2), 150);
-
         ofSetColor(0xffffff);
+        ofRotateX(90.0);                                            // från rör till velodrom
+        ofRotateX(tilt + tiltOffset);                               // tilt the cylinder
+        ofRotateZ(-pan + panOffset);                                 // spin it around
+        ofRotateY(180.0);                                             // for some reason it's upside down - turn it!
+		ofTranslate(0.0, 0.0, -CYLINDER_HEIGHT / 2);				// center the cylinder around "origin
 
-        // center the cylinder and rotate it to make it stand up properly
-        ofTranslate(centerX, centerY - (CYLINDER_HEIGHT / 2), CYLINDER_HEIGHT + CYLINDER_RADIUS);
-        ofRotateX(90.0f);
-        ofRotateY(180.0f);
-
-        // ofRotateX(tilt + tiltOffset);   // doesn't work - rotates the cylinder with top as reference
-        ofRotateZ(pan + panOffset);
-
-        // create a new quadric to hold our cylinder
         GLUquadric* quad = gluNewQuadric();
-
-        // tell GLU how to create the cylinder
         gluQuadricNormals(quad, GLU_SMOOTH);
         gluQuadricDrawStyle(quad, GLU_FILL);
-//        gluQuadricDrawStyle(quad, GLU_LINE);
+//      gluQuadricDrawStyle(quad, GLU_LINE);
         gluQuadricTexture(quad, GL_TRUE);
-        gluQuadricOrientation(quad, GLU_OUTSIDE);
-
-        // enable depth test, so we only see the front
         glEnable(GL_DEPTH_TEST);
 
-        // use our texture to draw the cylinder
         img.getTextureReference().bind();
-
-        // draw cylinder
-        // void gluCylinder	(	GLUquadric* quad , GLdouble base , GLdouble top , GLdouble height , GLint slices , GLint stacks );
         gluCylinder(quad, CYLINDER_RADIUS, CYLINDER_RADIUS, CYLINDER_HEIGHT, CYLINDER_SLICES, CYLINDER_STACKS);
-
-        // stop using our texture
         img.getTextureReference().unbind();
 
-        // delete the cylinder from memory
         gluDeleteQuadric(quad);
-
     ofPopMatrix();
+
 }
+
 //------------------------------------------------------------------------------------------------------------
 
-void testApp::keyReleased(int key)
+void
+testApp::drawReferenceLines()
+{
+	float len = 200.0;
+	glBegin(GL_LINES);
+	glColor3f(1.0, 0.0, 0.0);		// x = red
+	glVertex3f(0.0, 0.0, 0.0);
+	glVertex3f(len, 0.0, 0.0);
+	glColor3f(0.0, 1.0, 0.0);		// y = green
+	glVertex3f(0.0, 0.0, 0.0);
+	glVertex3f(0.0, len, 0.0);
+	glColor3f(0.0, 0.0, 1.0);		// z = blue
+	glVertex3f(0.0, 0.0, 0.0);
+	glVertex3f(0.0, 0.0, len);
+	glEnd();
+}
+
+//------------------------------------------------------------------------------------------------------------
+
+void
+testApp::autoRotate()
+{
+   	if (dir == 1) {
+		tilt += 0.1;
+		if (tilt > 10.0)
+			dir = 0;
+	}
+	else {
+		tilt -= 0.1;
+		if (tilt < -10.0)
+			dir = 1;
+	}
+
+	pan += 0.3;
+	if (pan > 360.0)
+		pan = 0;
+}
+
+//------------------------------------------------------------------------------------------------------------
+
+void
+testApp::keyReleased(int key)
 {
 	switch(key)
 	{
@@ -178,11 +220,10 @@ void testApp::keyReleased(int key)
 
 void testApp::mousePressed(int x, int y, int button)
 {
-        test = true;
+        zoom = ZOOM_OFFSET;
 }
-
 void testApp::mouseReleased(int x, int y, int button)
 {
-        test = false;
+        zoom = 0;
 }
 

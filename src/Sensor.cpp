@@ -243,13 +243,13 @@ Sensor::Parse(char* buf)
 
     sscanf(buf, SVFMT, &xtmp, &ytmp, &btmp);
 
-    fButton[ kButtonPreview ] = (btmp&0x01);
-    fButton[ kButtonNext    ] = (btmp&0x02);
-    fButton[ kButtonInfo    ] = (btmp&0x04);
-    fButton[ kButtonZoom    ] = (btmp&0x08);
+    fButton[ kButtonPrev ] = (btmp&0x01);
+    fButton[ kButtonNext ] = (btmp&0x02);
+    fButton[ kButtonInfo ] = (btmp&0x04);
+    fButton[ kButtonZoom ] = (btmp&0x08);
 
-    fPan  = xtmp;
-    fTilt = ytmp;
+    fPan  = ytmp;   // pan aorund y-axis
+    fTilt = xtmp;   // tilt around x-axis
 
     xlast = xtmp;
     ylast = ytmp;

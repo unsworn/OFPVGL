@@ -8,7 +8,7 @@ class Sensor
 public:
 
     enum ButtonState {
-        kButtonPreview,
+        kButtonPrev,
         kButtonNext,
         kButtonInfo,
         kButtonZoom,
