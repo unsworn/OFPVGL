@@ -93,11 +93,6 @@
 			<Add option="-lws2_32" />
 			<Add option="-lIphlpapi" />
 		</Linker>
-		<ExtraCommands>
-			<Add after='xcopy /e /i /y &quot;$(PROJECT_DIR)..\..\..\export\win_cb\*.dll&quot;  &quot;$(PROJECT_DIR)bin&quot;' />
-			<Add after='cmd /c if not exist &quot;$(PROJECT_DIR)bin/data&quot; mkdir &quot;$(PROJECT_DIR)bin/data&quot;' />
-			<Mode after="always" />
-		</ExtraCommands>
 		<Unit filename="C:\SDKs\OF0061\addons\ofxXmlSettings\libs\tinyxml.cpp">
 			<Option virtualFolder="addons\ofxXmlSettings\libs\" />
 		</Unit>

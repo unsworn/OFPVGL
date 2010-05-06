@@ -4,54 +4,59 @@ using namespace std;
 
 //------------------------------------------------------------------------------------------------------------
 
-// height = ((radius*2) * pi) / 4   -- too keep 4:1 aspect ratio
-#define CYLINDER_RADIUS     200
-#define CYLINDER_HEIGHT     314
+
+#define CYLINDER_RADIUS     1200
 #define CYLINDER_SLICES     32
 #define CYLINDER_STACKS     1
 
 #define NUM_SECTIONS        4       // number of quad strips that forms the cylinder
 
-#define ZOOM_OFFSET         100
+#define ZOOM_RATIO			0.3		// ratio of cylinder radius
 #define VIEWPORT_HEIGHT     450
+
+#define USE_SENSOR			1		// not implemented yet
 
 //------------------------------------------------------------------------------------------------------------
 
 void
 testApp::setup()
 {
-    loadSettings();             // load settings from XML
+    bUseArbTex = false;
+	ofDisableArbTex();			// Intel's gfx driver on EEE doesn't support GL_ARB_Texture_Rectangle so we use GL_TEXTURE_2D
 
 	ofDisableSetupScreen();
-	setupScreen();              // we do it ourselves
-
 	ofSetFrameRate(60);         // as smooth as possible
 	ofSetVerticalSync(true);
-
-    loadPanorama(0);            // load first pano
-
-	glEnable(GL_DEPTH_TEST);
+    glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
-
 	ofBackground(0, 0, 0);
 
-    tilt = 0.0;
-    pan = 0.0;
-    zoom = 0.0;
-    panOffset = 0.0;
-    tiltOffset = 0.0;
-    ang = 0.0;
-    test = false;
-    centerX = ofGetWidth() / 2;
-    centerY = ofGetHeight() / 2;
+	loadSettings();             // load settings from XML
+	setupScreen();              // we do it ourselves
 
-    // do not use ARB textures, this way it is easier to use the GLU objects
-    /*ofDisableArbTex();
-    img.loadImage("tri_tb_2048x512.jpg");    // ska vara "tri_tb_8000x2000" men det vill sig inte
-	ofEnableArbTex();
-    */
-    // init sensor
-	sensor = Sensor::Create();
+	cylinderHeight = ((CYLINDER_RADIUS * 2) * PI) / 4;		// too keep 4:1 ratio
+    tilt			= 0.0;
+    pan				= 0.0;
+    zoom			= 0.0;
+    panOffset		= 0.0;
+    tiltOffset		= 0.0;
+	zoomOffset		= CYLINDER_RADIUS * -ZOOM_RATIO;
+
+	view			= 1;							// 1 = standard, 2 = manual camera for debug
+	eyeX			= (float) ofGetWidth() / 2;
+	eyeY			= (float) ofGetHeight() / 2;
+	eyeZ			= 5000;
+
+	interfaceZ		= -665.0;	// -665! This should probably be calculated dynamically, but what the hey
+    interfaceW		= 1024.0;
+	interfaceH		= 448.0;
+
+	centerX = ofGetWidth() / 2;
+    centerY = ofGetHeight() / 2;
+	bShowInfo = false;
+
+    //infoImg.loadImage("info.png");
+    loadPanorama(0);            // load first pano
 }
 
 //------------------------------------------------------------------------------------------------------------
@@ -60,7 +65,7 @@ void
 testApp::loadSettings()
 {
     if(!xml.loadFile("settings.xml")) {
-        printf("Couldn't load XML settings!\n");
+        ofLog(OF_LOG_ERROR, "loadSettings: Couldn't load XML settings!\n");
     }
 
     panOffset = xml.getValue("PVGL:PANOFFSET", 0);      // 0 is default value if settings file doesn't exist
@@ -73,14 +78,14 @@ testApp::loadSettings()
     for (int i = 0; i < numPanos; i++ )
     {
         panoUrls[i] = xml.getValue("PANO", "*** invalid pano url ***", i);
-        cout << "URL #" << i << ": " << panoUrls[i] << endl;
+        cout << "loadSettings: URL #" << i << ": " << panoUrls[i] << endl;
     }
     xml.popTag(); // PANOS
     xml.popTag(); // PVGL
 
-    printf("panOffset = %f\n", panOffset);
-    printf("tiltOffset = %f\n", tiltOffset);
-    printf("viewPortVerticalOffset = %f\n", viewportVerticalOffset);
+    //printf("panOffset = %f\n", panOffset);
+    //printf("tiltOffset = %f\n", tiltOffset);
+    //printf("viewPortVerticalOffset = %f\n", viewportVerticalOffset);
 }
 
 //------------------------------------------------------------------------------------------------------------
@@ -88,52 +93,47 @@ testApp::loadSettings()
 void
 testApp::setupScreen()
 {
-    int w, h;
-
-	w = ofGetWidth();
-	h = ofGetHeight();
-
-	float halfFov, theTan, screenFov, aspect;
-	screenFov 		= 60.0f;
-	float eyeX 		= (float)w / 2.0;
-	float eyeY 		= (float)h / 2.0;
-	halfFov 		= PI * screenFov / 360.0;
-	theTan 			= tanf(halfFov);
-	float dist 		= eyeY / theTan;
-	float nearDist 	= dist / 10.0;	// near / far clip plane
-	float farDist 	= dist * 10.0;
-	aspect 			= (float)w / (float)h;
+	float fov = 60.0;
+	float nearDist = 10.0;			// near/far clipping planes
+	float farDist = 10000.0;
+	float aspect = (float) ofGetWidth() / (float) ofGetHeight();
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(screenFov, aspect, nearDist, farDist);
+	gluPerspective(fov, aspect, nearDist, farDist);
+	//glOrtho(-1000.0, 1000.0, -1000.0, 1000.0, 10.0, 10000.0);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-
-	//gluLookAt(eyeX, eyeY, dist, eyeX, eyeY, 0.0, 0.0, 1.0, 0.0);
-
-	//glScalef(1, -1, 1);			// invert Y axis so increasing Y goes down
-  	//glTranslatef(0, -h, 0);       // shift origin up to upper-left corner.
 }
 //------------------------------------------------------------------------------------------------------------
 
-void testApp::loadPanorama(int newPanoId)
+void
+testApp::loadPanorama(int newPanoId)
 {
-    cout << "Loading panorama:" << panoUrls[newPanoId] << endl;
+    cout << "loadPanorama: " << panoUrls[newPanoId] << endl;
 
     // TODO: unload currentPanorama!
     // TODO: Error checking!
-   	panorama.loadImage(panoUrls[newPanoId]);			// 8000x2000
-    currPanoId = newPanoId;
+   	panorama.loadImage(panoUrls[newPanoId]);			// 8000x2000 -- TODO: Hmm: glError says "invalid value caught"
+	currPanoId = newPanoId;
 
-	float panoW = panorama.getWidth();
+	currPanoW = (int)panorama.getWidth();
+	currPanoH = (int)panorama.getHeight();
 
 	// TODO: if panoW > GL_MAX_TEXTURE_SIZE (normally 2048) split it into sections
-	sectionW = panoW / NUM_SECTIONS;		// 8000 / 4 = 2000
-
+	sectionW = currPanoW / NUM_SECTIONS;		// 8000 / 4 = 2000
     setupTextures();			// load images and create textures
+
+	// TODO: Info-image hack
+	//infoImg.loadImage("info.png");
+    //int imgW = infoImg.getWidth();
+	//int imgH = infoImg.getHeight();
+	//infoTexture.allocate(imgW, imgH, GL_RGBA, true);
+	//infoTexture.loadData(infoImg.getPixels(), imgW, imgH, GL_RGBA);
 }
+
+//------------------------------------------------------------------------------------------------------------
 
 void
 testApp::setupTextures()
@@ -157,7 +157,7 @@ testApp::setupTextures()
 	for (int i = 0; i < 4; i++)
 	{
 		j--;	// reverse image order
-		textures[i].allocate(sectionW, sectionW, GL_RGB, true);		// textures are initially bound and enabled here
+		textures[i].allocate(sectionW, sectionW, GL_RGB, bUseArbTex);		// textures are initially bound and enabled here
 		textures[i].loadData(images[j].getPixels(), sectionW, sectionW, GL_RGB);
 	}
 }
@@ -166,17 +166,20 @@ testApp::setupTextures()
 void
 testApp::update()
 {
+	/*
     // do sensor polling here
     if (sensor != NULL)
     {
-        sensor->Poll();
-        tilt = sensor->ReadTilt();
-        pan = sensor->ReadPan();
+        //sensor->Poll();
+        //tilt = sensor->ReadTilt();
+        //pan = sensor->ReadPan();
     }
     else
         printf("Sensor is NULL\n");
+	*/
 
-    ang += 0.2;
+	if (!USE_SENSOR)
+		printf("Not using sensor");
 }
 
 //------------------------------------------------------------------------------------------------------------
@@ -188,108 +191,87 @@ testApp::draw()
     //    return ;
 
     /*
-    if (!sensor->HasChanged())
-        return ;
-    */
+	 if (!sensor->HasChanged())
+	 return ;
+	 */
 
-    zoom = 0;
+    checkButtons();
 
-    if (sensor->IsButtonPressed(Sensor::kButtonPrev))
-    {
-        printf("PREV pressed!\n");
-    }
-    if (sensor->IsButtonPressed(Sensor::kButtonNext))
-    {
-        printf("NEXT pressed!\n");
-    }
-    if (sensor->IsButtonPressed(Sensor::kButtonInfo))
-    {
-        printf("INFO pressed!\n");
-    }
-    if (sensor->IsButtonPressed(Sensor::kButtonZoom))
-    {
-        printf("ZOOM pressed!\n");
-        zoom = ZOOM_OFFSET;
-    }
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
 
-    ofPushMatrix();
+	if (view == 1)
+		gluLookAt(0.0, 0.0, zoom, 0.0, 0.0, -10000.0, 0.0, 1.0, 0.0);	// real deal
+	else if (view == 2)
+		gluLookAt(eyeX, eyeY, eyeZ, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);		// overview
 
-    glTranslated(0.0, -CYLINDER_HEIGHT / 2, zoom);          // "setup camera"
-                                                            // TODO: tilt + zoom = no good
-    drawReferenceLines(500.0);
-    glColor3f(1.0, 1.0, 1.0);
 
-    glRotatef(tilt + tiltOffset, 1.0, 0.0, 0.0);        // tilt
-    glRotatef(pan + panOffset, 0.0, 1.0, 0.0);          // pan
+	ofPushMatrix();														// store camera matrix
 
-	drawCylinder(CYLINDER_RADIUS, CYLINDER_HEIGHT, 32);
+	drawReferenceLines(2000.0);
 
+	glColor3f(1.0, 1.0, 1.0);
+    glRotatef(tilt + tiltOffset, 1000.0, 0.0, 0.0);						// tilt
+	glRotatef(pan + panOffset, 0.0, 1000.0, 0.0);						// pan
+
+	drawCylinder(CYLINDER_RADIUS, cylinderHeight, CYLINDER_SLICES);
 	ofPopMatrix();
 
-
-    /*
-    ofTranslate(centerX, centerY, CYLINDER_RADIUS * 2);             // position the "camera"
-    ofTranslate(0.0, 0.0, zoom);                                    // zoom?
-    drawReferenceLines();
-
-    ofPushMatrix();
-        ofSetColor(0xffffff);
-        ofRotateX(90.0);                                            // från rör till velodrom
-        ofRotateX(tilt + tiltOffset);                               // tilt the cylinder
-        ofRotateZ(-pan + panOffset);                                 // spin it around
-        ofRotateY(180.0);                                             // for some reason it's upside down - turn it!
-		ofTranslate(0.0, 0.0, -CYLINDER_HEIGHT / 2);				// center the cylinder around "origin
-
-        GLUquadric* quad = gluNewQuadric();
-        gluQuadricNormals(quad, GLU_SMOOTH);
-        gluQuadricDrawStyle(quad, GLU_FILL);
-//      gluQuadricDrawStyle(quad, GLU_LINE);
-        gluQuadricTexture(quad, GL_TRUE);
-        glEnable(GL_DEPTH_TEST);
-
-        img.getTextureReference().bind();
-        gluCylinder(quad, CYLINDER_RADIUS, CYLINDER_RADIUS, CYLINDER_HEIGHT, CYLINDER_SLICES, CYLINDER_STACKS);
-        img.getTextureReference().unbind();
-
-        gluDeleteQuadric(quad);
-    ofPopMatrix();
-    */
+	if (bShowInfo) {				// use alpha blending
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		drawInfoScreen();
+		glDisable(GL_BLEND);
+	}
+    glError();
 }
 
 //------------------------------------------------------------------------------------------------------------
 
-// Draws an open, 1-stacked cylinder around the X-axis. Top is X=0
-void testApp::drawCylinder(double radius, double height, int slices)
+// Draws an open, 1-stacked cylinder around the Y-axis.
+// Bottom is Y=(-height/2) and top is Y=(height/2)
+void
+testApp::drawCylinder(double radius, double height, int slices)
 {
     int i, j;
+	double tx, ty, vx, vy, vz;
 
     /* Pre-computed circle */
     double *sint, *cost;
     circleTable(&sint, &cost, -slices);
 
-	double imgW = 2000.0;
-	double imgH = 2000.0;
-
-	double quadW = imgW / (slices / NUM_SECTIONS);
+	double quadW = currPanoW / (slices / NUM_SECTIONS);
 	int slice = 1;
 
 	for (j = 0; j < NUM_SECTIONS; j++)
 	{
-		slice--;		// start at the same line as the last quad
+		//printf("---------------------------\n");
+		slice--;				// start at the same line as the last quad
 
 		textures[j].bind();		// bind the right texture
 
 		glBegin(GL_QUAD_STRIP);
 		for (i = 0; i <= slices / NUM_SECTIONS; i++)
 		{
-			glTexCoord2d(imgW - (quadW * i), imgH);
-			glVertex3d(cost[slice]*radius, 0.0, sint[slice]*radius);
-			//printf("Vertex: X=%f Y=%f Z=%f \n", cost[i]*radius, y0, sint[i]*radius);
+			tx = (currPanoW - (quadW * i)) / currPanoW;		// clamp texture coords to 0..1
+			ty = currPanoH / currPanoH;						// 1.0
+			vx = cost[slice] * radius;
+			vy = -height/2;
+			vz = sint[slice] * radius;
+			glTexCoord2d(tx, ty);
+			glVertex3d(vx, vy , vz);
+//			printf("Tex: X=%f Y=%f  ", tx, ty);
+//			printf("Vertex: X=%f Y=%f Z=%f \n", vx, vy, vz);
 
-			//glVertex3d(cost[j]*radius, sint[j]*radius, z1  );
-			glTexCoord2d(imgW - (quadW * i), 0.0);
-			glVertex3d(cost[slice]*radius, height, sint[slice]*radius);
-			//printf("Vertex: X=%f Y=%f Z=%f \n", cost[j]*radius, y1, sint[j]*radius);
+			//tx = (imgW - (quadW * i)) / imgW;		// tx is the same
+			ty = 0.0 / currPanoH;						// 0.0
+			//vx = cost[slice] * radius;			// vx is the same
+			vy = height/2;
+			//vz = sint[slice]*radius;				// vz as well
+			glTexCoord2d(tx, ty);
+			glVertex3d(vx, vy , vz);
+//			printf("Tex: X=%f Y=%f  ", tx, ty);
+//			printf("Vertex: X=%f Y=%f Z=%f \n", vx, vy, vz);
 
 			slice++;
 		}
@@ -299,6 +281,26 @@ void testApp::drawCylinder(double radius, double height, int slices)
     /* Release sin and cos tables */
     free(sint);
     free(cost);
+}
+
+
+//------------------------------------------------------------------------------------------------------------
+
+void
+testApp::drawInfoScreen()
+{
+	float infoW = 1024.0;
+	float infoH = 448.0;
+
+	glTranslatef(-interfaceW / 2, -interfaceH / 2, interfaceZ + zoom);
+	infoTexture.bind();
+
+	glBegin(GL_QUADS);
+        glTexCoord2f(0.0, 0.0); glVertex2f(0.0, 0.0);
+        glTexCoord2f(infoW, 0.0); glVertex2f(interfaceW, 0.0);
+        glTexCoord2f(infoW, infoH); glVertex2f(interfaceW, interfaceH);
+        glTexCoord2f(0.0, infoH); glVertex2f(0.0, interfaceH);
+	glEnd();
 }
 
 //------------------------------------------------------------------------------------------------------------
@@ -379,44 +381,99 @@ testApp::drawReferenceLines(float len)
 	glVertex3f(0.0, len/20, len - len/10);
 	glEnd();
 
-	glClear(GL_COLOR_BUFFER_BIT);
+	//glClear(GL_COLOR_BUFFER_BIT);
 }
-
 
 //------------------------------------------------------------------------------------------------------------
 
 void
-testApp::keyReleased(int key)
+testApp::showInfo()
 {
+	bShowInfo = true;
+}
+
+//------------------------------------------------------------------------------------------------------------
+
+void
+testApp::hideInfo()
+{
+	bShowInfo = false;
+}
+
+//------------------------------------------------------------------------------------------------------------
+
+void
+testApp::keyPressed(int key)
+{
+	//cout << "key: " << key << endl;
+
+	double eyeIncr = 20.0;
+
 	switch(key)
 	{
-		case OF_KEY_LEFT:
+		case 97:							// A -> Zoom
+			zoom = zoomOffset;
+			break;
+		case 115:							// S -> Info
+			showInfo();
+			break;
+		case 122:							// Z -> Previous
 			loadPanorama(--currPanoId);
 			break;
+		case 120:							// X -> Next
+			loadPanorama(++currPanoId);
+			break;
+
+		case OF_KEY_LEFT:					// Arrow keys -> manual pan and tilt
+			pan -= 5;
+			break;
 		case OF_KEY_RIGHT:
-            loadPanorama(++currPanoId);
+            pan += 5;
 			break;
         case OF_KEY_UP:
-            y += 4;
+            tilt += 5;
 			break;
         case OF_KEY_DOWN:
-            y -= 4;
+            tilt -= 5;
 			break;
-        case OF_KEY_F5:
-            z += 4;
-            break;
-        case OF_KEY_F6:
-            z -= 4;
-            break;
+											// manual camera control
+		case 103:							// G
+			eyeX += eyeIncr;
+			break;
+		case 98:							// B
+			eyeX -= eyeIncr;
+			break;
+		case 104:							// H
+			eyeY += eyeIncr;
+			break;
+		case 110:							// N
+			eyeY -= eyeIncr;
+			break;
+		case 106:							// J
+			eyeZ += eyeIncr;
+			break;
+		case 109:							// M
+			eyeZ -= eyeIncr;
+			break;
+
+		// debug
 		case OF_KEY_RETURN:
 			cout << "framerate: " << ofGetFrameRate() << std::endl;
-			//cout << "key: " << key << endl;
             cout << "Tilt: " << tilt << " Pan: " << pan << endl;
-            cout << "X=" << x << " Y=" << y << " Z=" << z << endl;
+            cout << "eyeX=" << eyeX << " eyeY=" << eyeY << " eyeZ=" << eyeZ << endl;
 
-//			GLint texSize;
-//			glGetIntegerv(GL_MAX_TEXTURE_SIZE, &texSize);
-//			cout << "GL_MAX_TEXTURE_SIZE: " << texSize << endl;
+			GLint texSize;
+			glGetIntegerv(GL_MAX_TEXTURE_SIZE, &texSize);
+			cout << "GL_MAX_TEXTURE_SIZE: " << texSize << endl;
+
+			GLint maxArbRectSize;
+			glGetIntegerv(GL_MAX_RECTANGLE_TEXTURE_SIZE_ARB, &maxArbRectSize);
+			cout << "GL_MAX_RECTANGLE_TEXTURE_SIZE_ARB: " << maxArbRectSize << endl;
+
+			cout << "VERSION: " << (GLubyte*) glGetString(GL_VERSION) << endl;
+            cout << "RENDERER: " << (GLubyte*) glGetString(GL_RENDERER) << endl;
+            cout << "VENDOR: " << (GLubyte*) glGetString(GL_VENDOR) << endl;
+            //cout << "EXTENSIONS: " << (GLubyte*) glGetString(GL_EXTENSIONS) << endl;
 
 			break;
 
@@ -427,12 +484,95 @@ testApp::keyReleased(int key)
 
 }
 
+//------------------------------------------------------------------------------------------------------------
+
+void
+testApp::keyReleased(int key)
+{
+
+	switch(key)
+	{
+		case 'a':							// A
+			zoom = 0.0;						// Zoom out to normal
+			break;
+		case 's':							// S -> Info
+			hideInfo();
+			break;
+
+		case '1':							// Views
+			view = 1;
+			break;
+		case '2':
+			view = 2;
+			break;
+	}
+}
+
+//------------------------------------------------------------------------------------------------------------
+
+void
+testApp::checkButtons()
+{
+/*
+    if (sensor->IsButtonPressed(Sensor::kButtonPrev))               // PREV button
+    {
+        if (btnPrevDown)
+            return; // not the first click
+
+        btnPrevDown = true;
+        // save to buttonHistory
+        loadPanorama(currPanoId - 1);
+        printf("PREV pressed!\n");
+    }
+    else
+    {
+        btnPrevDown = false;
+    }
+
+    if (sensor->IsButtonPressed(Sensor::kButtonNext))
+    {
+        if (btnNextDown)
+            return;
+
+        btnNextDown = true;
+        loadPanorama(currPanoId + 1);
+        printf("NEXT pressed!\n");
+    }
+    else
+    {
+        btnNextDown = false;
+    }
+
+    if (sensor->IsButtonPressed(Sensor::kButtonInfo))
+    {
+        printf("INFO pressed!\n");
+    }
+    if (sensor->IsButtonPressed(Sensor::kButtonZoom))
+    {
+        printf("ZOOM pressed!\n");
+        zoom = ZOOM_OFFSET;
+    }
+	*/
+
+}
+
 void testApp::mousePressed(int x, int y, int button)
 {
-        zoom = ZOOM_OFFSET;
+	//zoom = ZOOM_OFFSET;
+	//glError();
 }
 void testApp::mouseReleased(int x, int y, int button)
 {
-        zoom = 0;
+	//zoom = 0;
+}
+
+void
+testApp::glError()
+{
+	GLenum err = glGetError();
+	while (err != GL_NO_ERROR) {
+		fprintf(stderr, "glError: %s caught at %s:%u\n", (char *)gluErrorString(err), __FILE__, __LINE__);
+		err = glGetError();
+	}
 }
 
