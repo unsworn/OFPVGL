@@ -8,11 +8,11 @@ class Sensor
 public:
 
     enum ButtonState {
-        kButtonPrev,
-        kButtonNext,
-        kButtonInfo,
-        kButtonZoom,
-        kNumButtons
+        BUTTON_PREV,
+        BUTTON_NEXT,
+        BUTTON_INFO,
+        BUTTON_ZOOM,
+        NUM_BUTTONS
     };
 
 
@@ -50,7 +50,7 @@ private:
     bool  fCTilt;
     bool  fCButton;
 
-    int   fButton[kNumButtons];
+    int   fButton[NUM_BUTTONS];
 
 };
 

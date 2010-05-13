@@ -113,7 +113,6 @@ public:
                         (*end) = '\0';
 
                         fSelectedPort = strdup(portName);
-
                     }
 
                 }
@@ -222,7 +221,7 @@ Sensor::ReadTilt()
 bool
 Sensor::IsButtonPressed(ButtonState button)
 {
-    if ( button >= kNumButtons)
+    if ( button >= NUM_BUTTONS)
         return false;
 
     return (fButton[ button ] != 0);
@@ -243,10 +242,10 @@ Sensor::Parse(char* buf)
 
     sscanf(buf, SVFMT, &xtmp, &ytmp, &btmp);
 
-    fButton[ kButtonPrev ] = (btmp&0x01);
-    fButton[ kButtonNext ] = (btmp&0x02);
-    fButton[ kButtonInfo ] = (btmp&0x04);
-    fButton[ kButtonZoom ] = (btmp&0x08);
+    fButton[ BUTTON_ZOOM ] = (btmp&0x01);
+    fButton[ BUTTON_PREV ] = (btmp&0x02);
+    fButton[ BUTTON_INFO ] = (btmp&0x04);
+    fButton[ BUTTON_NEXT ] = (btmp&0x08);
 
     fPan  = ytmp;   // pan aorund y-axis
     fTilt = xtmp;   // tilt around x-axis

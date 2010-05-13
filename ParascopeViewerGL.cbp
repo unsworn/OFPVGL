@@ -5,7 +5,7 @@
 		<Option title="ParascopeViewerGL" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="addons\;src\;addons\ofxXmlSettings\;addons\ofxXmlSettings\src\;addons\ofxXmlSettings\libs\;" />
+		<Option virtualFolders="addons\;src\;addons\ofxXmlSettings\;addons\ofxXmlSettings\src\;addons\ofxXmlSettings\libs\;addons\ofxDirList\;addons\ofxDirList\src\;" />
 		<Build>
 			<Target title="release">
 				<Option output="bin\$(PROJECT_NAME)" prefix_auto="1" extension_auto="1" />
@@ -62,6 +62,7 @@
 			<Add directory="C:\SDKs\OF0061\libs\poco\include" />
 			<Add directory="C:\SDKs\OF0061\addons\ofxXmlSettings\libs" />
 			<Add directory="C:\SDKs\OF0061\addons\ofxXmlSettings\src" />
+			<Add directory="C:\SDKs\OF0061\addons\ofxDirList\src" />
 		</Compiler>
 		<Linker>
 			<Add option="C:/SDKs/OF0061/libs/FreeImage/lib/win_cb/FreeImage.lib" />
@@ -93,6 +94,12 @@
 			<Add option="-lws2_32" />
 			<Add option="-lIphlpapi" />
 		</Linker>
+		<Unit filename="C:\SDKs\OF0061\addons\ofxDirList\src\ofxDirList.cpp">
+			<Option virtualFolder="addons\ofxDirList\src\" />
+		</Unit>
+		<Unit filename="C:\SDKs\OF0061\addons\ofxDirList\src\ofxDirList.h">
+			<Option virtualFolder="addons\ofxDirList\src\" />
+		</Unit>
 		<Unit filename="C:\SDKs\OF0061\addons\ofxXmlSettings\libs\tinyxml.cpp">
 			<Option virtualFolder="addons\ofxXmlSettings\libs\" />
 		</Unit>
@@ -111,6 +118,18 @@
 		<Unit filename="C:\SDKs\OF0061\addons\ofxXmlSettings\src\ofxXmlSettings.h">
 			<Option virtualFolder="addons\ofxXmlSettings\src\" />
 		</Unit>
+		<Unit filename="src\PVGL.cpp">
+			<Option virtualFolder="src\" />
+		</Unit>
+		<Unit filename="src\PVGL.h">
+			<Option virtualFolder="src\" />
+		</Unit>
+		<Unit filename="src\PVGLAdmin.cpp">
+			<Option virtualFolder="src\" />
+		</Unit>
+		<Unit filename="src\PVGLAdmin.h">
+			<Option virtualFolder="src\" />
+		</Unit>
 		<Unit filename="src\Sensor.cpp">
 			<Option virtualFolder="src\" />
 		</Unit>
@@ -118,12 +137,6 @@
 			<Option virtualFolder="src\" />
 		</Unit>
 		<Unit filename="src\main.cpp">
-			<Option virtualFolder="src\" />
-		</Unit>
-		<Unit filename="src\testApp.cpp">
-			<Option virtualFolder="src\" />
-		</Unit>
-		<Unit filename="src\testApp.h">
 			<Option virtualFolder="src\" />
 		</Unit>
 		<Extensions>
