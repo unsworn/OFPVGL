@@ -1,0 +1,1083 @@
+# depslib dependency file v1.0
+1272970830 source:\\vmware-host\shared folders\parascopeviewergl\src\testapp.cpp
+	"testApp.h"
+
+1272966355 \\vmware-host\shared folders\parascopeviewergl\src\testapp.h
+	"ofMain.h"
+	"ofxXMLSettings.h"
+
+1270457831 c:\sdks\of0061\libs\openframeworks\ofmain.h
+	"ofConstants.h"
+	"ofMath.h"
+	"ofUtils.h"
+	"ofTypes.h"
+	"ofSerial.h"
+	"ofArduino.h"
+	"ofTexture.h"
+	"ofTrueTypeFont.h"
+	"ofGraphics.h"
+	"ofImage.h"
+	"ofBaseApp.h"
+	"ofAppRunner.h"
+	"ofSoundStream.h"
+	"ofSoundPlayer.h"
+	"ofVideoGrabber.h"
+	"ofVideoPlayer.h"
+	"ofEvents.h"
+
+1270457825 c:\sdks\of0061\libs\openframeworks\utils\ofconstants.h
+	<TargetConditionals.h>
+	<windows.h>
+	"GLee.h"
+	"glu.h"
+	<unistd.h>
+	"GLee.h"
+	<OpenGL/glu.h>
+	<ApplicationServices/ApplicationServices.h>
+	<unistd.h>
+	"GLee.h"
+	<GL/glu.h>
+	<stdio.h>
+	<stdarg.h>
+	<math.h>
+	<time.h>
+	<stdlib.h>
+	<string.h>
+	<iostream>
+	<vector>
+	<string>
+	<sstream>
+	<iomanip>
+
+1270457817 c:\sdks\of0061\libs\glee\include\glee.h
+	<windows.h>
+	<GL/gl.h>
+	<OpenGL/gl.h>
+	<GL/gl.h>
+	<GL/glx.h>
+	<stddef.h>
+
+1270457804 c:\sdks\of0061\libs\glu\include\glu.h
+	"glu_mangle.h"
+	<GL/gl.h>
+
+1270457825 c:\sdks\of0061\libs\openframeworks\utils\ofmath.h
+	"ofConstants.h"
+
+1270457826 c:\sdks\of0061\libs\openframeworks\utils\ofutils.h
+	"ofConstants.h"
+	<shellapi.h>
+
+1270457826 c:\sdks\of0061\libs\openframeworks\utils\oftypes.h
+	"ofConstants.h"
+
+1270457821 c:\sdks\of0061\libs\openframeworks\communication\ofserial.h
+	"ofConstants.h"
+	<termios.h>
+	<sys/ioctl.h>
+	<getopt.h>
+	<dirent.h>
+	<winbase.h>
+	<tchar.h>
+	<iostream>
+	<string.h>
+	<setupapi.h>
+	<regstr.h>
+	<winioctl.h>
+	<initguid.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<fcntl.h>
+	<errno.h>
+	<ctype.h>
+
+1270457821 c:\sdks\of0061\libs\openframeworks\communication\ofarduino.h
+	<list>
+	<vector>
+	<string>
+	<iostream>
+	"ofEvents.h"
+	"ofSerial.h"
+
+1270457831 c:\sdks\of0061\libs\openframeworks\events\ofevents.h
+	"ofConstants.h"
+	"ofEventUtils.h"
+	"ofxEventUtils.h"
+
+1270457831 c:\sdks\of0061\libs\openframeworks\events\ofeventutils.h
+	"ofConstants.h"
+	"Poco/FIFOEvent.h"
+	"Poco/Delegate.h"
+
+1270457968 c:\sdks\of0061\libs\poco\include\poco\fifoevent.h
+	"Poco/AbstractEvent.h"
+	"Poco/FIFOStrategy.h"
+	"Poco/AbstractDelegate.h"
+	"Poco/CompareFunctions.h"
+
+1270457929 c:\sdks\of0061\libs\poco\include\poco\abstractevent.h
+	"Poco/Foundation.h"
+	"Poco/SingletonHolder.h"
+	"Poco/SharedPtr.h"
+	"Poco/ActiveResult.h"
+	"Poco/ActiveMethod.h"
+	"Poco/Mutex.h"
+
+1270457946 c:\sdks\of0061\libs\poco\include\poco\foundation.h
+	"Poco/Config.h"
+	"Poco/Platform.h"
+	"Poco/Platform_WIN32.h"
+	"Poco/Platform_VMS.h"
+	"Poco/Platform_POSIX.h"
+	"Poco/Bugcheck.h"
+	"Poco/Types.h"
+	<string>
+
+1270457977 c:\sdks\of0061\libs\poco\include\poco\config.h
+
+1270457932 c:\sdks\of0061\libs\poco\include\poco\platform.h
+
+1270457924 c:\sdks\of0061\libs\poco\include\poco\platform_win32.h
+
+1270458031 c:\sdks\of0061\libs\poco\include\poco\platform_vms.h
+
+1270457959 c:\sdks\of0061\libs\poco\include\poco\platform_posix.h
+
+1270457961 c:\sdks\of0061\libs\poco\include\poco\bugcheck.h
+	"Poco/Foundation.h"
+	<string>
+
+1270457948 c:\sdks\of0061\libs\poco\include\poco\types.h
+	"Poco/Foundation.h"
+
+1270458036 c:\sdks\of0061\libs\poco\include\poco\singletonholder.h
+	"Poco/Foundation.h"
+	"Poco/Mutex.h"
+
+1270457980 c:\sdks\of0061\libs\poco\include\poco\mutex.h
+	"Poco/Foundation.h"
+	"Poco/Exception.h"
+	"Poco/ScopedLock.h"
+	"Poco/Mutex_WIN32.h"
+	"Poco/Mutex_POSIX.h"
+
+1270457958 c:\sdks\of0061\libs\poco\include\poco\exception.h
+	"Poco/Foundation.h"
+	<stdexcept>
+
+1270458035 c:\sdks\of0061\libs\poco\include\poco\scopedlock.h
+	"Poco/Foundation.h"
+
+1270457940 c:\sdks\of0061\libs\poco\include\poco\mutex_win32.h
+	"Poco/Foundation.h"
+	"Poco/Exception.h"
+	"Poco/UnWindows.h"
+
+1270457929 c:\sdks\of0061\libs\poco\include\poco\unwindows.h
+	<windows.h>
+
+1270457973 c:\sdks\of0061\libs\poco\include\poco\mutex_posix.h
+	"Poco/Foundation.h"
+	"Poco/Exception.h"
+	<pthread.h>
+	<errno.h>
+
+1270457980 c:\sdks\of0061\libs\poco\include\poco\sharedptr.h
+	"Poco/Foundation.h"
+	"Poco/Exception.h"
+	"Poco/Mutex.h"
+	<algorithm>
+
+1270457979 c:\sdks\of0061\libs\poco\include\poco\activeresult.h
+	"Poco/Foundation.h"
+	"Poco/Mutex.h"
+	"Poco/Event.h"
+	"Poco/RefCountedObject.h"
+	"Poco/Exception.h"
+	<algorithm>
+
+1270458006 c:\sdks\of0061\libs\poco\include\poco\event.h
+	"Poco/Foundation.h"
+	"Poco/Exception.h"
+	"Poco/Event_WIN32.h"
+	"Poco/Event_POSIX.h"
+
+1270457951 c:\sdks\of0061\libs\poco\include\poco\event_win32.h
+	"Poco/Foundation.h"
+	"Poco/Exception.h"
+	"Poco/UnWindows.h"
+
+1270457936 c:\sdks\of0061\libs\poco\include\poco\event_posix.h
+	"Poco/Foundation.h"
+	"Poco/Exception.h"
+	<pthread.h>
+	<errno.h>
+
+1270457991 c:\sdks\of0061\libs\poco\include\poco\refcountedobject.h
+	"Poco/Foundation.h"
+	"Poco/Mutex.h"
+
+1270457926 c:\sdks\of0061\libs\poco\include\poco\activemethod.h
+	"Poco/Foundation.h"
+	"Poco/ActiveResult.h"
+	"Poco/ActiveRunnable.h"
+	"Poco/ActiveStarter.h"
+	"Poco/AutoPtr.h"
+
+1270457924 c:\sdks\of0061\libs\poco\include\poco\activerunnable.h
+	"Poco/Foundation.h"
+	"Poco/ActiveResult.h"
+	"Poco/Runnable.h"
+	"Poco/RefCountedObject.h"
+	"Poco/AutoPtr.h"
+	"Poco/Exception.h"
+
+1270457962 c:\sdks\of0061\libs\poco\include\poco\runnable.h
+	"Poco/Foundation.h"
+
+1270457936 c:\sdks\of0061\libs\poco\include\poco\autoptr.h
+	"Poco/Foundation.h"
+	"Poco/Exception.h"
+	<algorithm>
+
+1270457934 c:\sdks\of0061\libs\poco\include\poco\activestarter.h
+	"Poco/Foundation.h"
+	"Poco/ThreadPool.h"
+	"Poco/ActiveRunnable.h"
+
+1270457932 c:\sdks\of0061\libs\poco\include\poco\threadpool.h
+	"Poco/Foundation.h"
+	"Poco/Thread.h"
+	"Poco/Mutex.h"
+	<vector>
+
+1270457958 c:\sdks\of0061\libs\poco\include\poco\thread.h
+	"Poco/Foundation.h"
+	"Poco/Mutex.h"
+	"Poco/Thread_WIN32.h"
+	"Poco/Thread_POSIX.h"
+
+1270457949 c:\sdks\of0061\libs\poco\include\poco\thread_win32.h
+	"Poco/Foundation.h"
+	"Poco/Runnable.h"
+	"Poco/UnWindows.h"
+
+1270457972 c:\sdks\of0061\libs\poco\include\poco\thread_posix.h
+	"Poco/Foundation.h"
+	"Poco/Runnable.h"
+	"Poco/SignalHandler.h"
+	"Poco/Event.h"
+	"Poco/RefCountedObject.h"
+	"Poco/AutoPtr.h"
+	<pthread.h>
+	<sys/select.h>
+	<errno.h>
+
+1270457964 c:\sdks\of0061\libs\poco\include\poco\signalhandler.h
+	"Poco/Foundation.h"
+	<vector>
+	<setjmp.h>
+
+1270457959 c:\sdks\of0061\libs\poco\include\poco\fifostrategy.h
+	"Poco/NotificationStrategy.h"
+	<map>
+	<list>
+	<memory>
+
+1270457913 c:\sdks\of0061\libs\poco\include\poco\notificationstrategy.h
+	"Poco/Foundation.h"
+
+1270457978 c:\sdks\of0061\libs\poco\include\poco\abstractdelegate.h
+	"Poco/Foundation.h"
+
+1270457950 c:\sdks\of0061\libs\poco\include\poco\comparefunctions.h
+	"Poco/Foundation.h"
+	<functional>
+
+1270457934 c:\sdks\of0061\libs\poco\include\poco\delegate.h
+	"Poco/Foundation.h"
+	"Poco/AbstractDelegate.h"
+	"Poco/FunctionDelegate.h"
+	"Poco/Expire.h"
+
+1270457969 c:\sdks\of0061\libs\poco\include\poco\functiondelegate.h
+	"Poco/Foundation.h"
+	"Poco/AbstractDelegate.h"
+
+1270457992 c:\sdks\of0061\libs\poco\include\poco\expire.h
+	"Poco/Foundation.h"
+	"Poco/AbstractDelegate.h"
+	"Poco/Timestamp.h"
+
+1270457937 c:\sdks\of0061\libs\poco\include\poco\timestamp.h
+	"Poco/Foundation.h"
+	<ctime>
+
+1270457818 c:\sdks\of0061\libs\openframeworks\graphics\oftexture.h
+	"ofConstants.h"
+	"ofGraphics.h"
+
+1270457818 c:\sdks\of0061\libs\openframeworks\graphics\ofgraphics.h
+	"ofConstants.h"
+	"ofTypes.h"
+
+1270457820 c:\sdks\of0061\libs\openframeworks\graphics\oftruetypefont.h
+	"ofConstants.h"
+	"ofGraphics.h"
+	"ofUtils.h"
+	"ofTypes.h"
+
+1270457818 c:\sdks\of0061\libs\openframeworks\graphics\ofimage.h
+	"ofConstants.h"
+	"ofTexture.h"
+	"ofGraphics.h"
+	"ofAppRunner.h"
+	"FreeImage.h"
+	"ofUtils.h"
+
+1270457827 c:\sdks\of0061\libs\openframeworks\app\ofapprunner.h
+	"ofMain.h"
+	"ofBaseApp.h"
+	"ofAppBaseWindow.h"
+	"ofAppGlutWindow.h"
+
+1270457827 c:\sdks\of0061\libs\openframeworks\app\ofbaseapp.h
+	"ofTypes.h"
+
+1270457828 c:\sdks\of0061\libs\openframeworks\app\ofappbasewindow.h
+	"ofTypes.h"
+
+1270457826 c:\sdks\of0061\libs\openframeworks\app\ofappglutwindow.h
+	"ofConstants.h"
+	"ofAppBaseWindow.h"
+	"glut.h"
+	<GLUT/glut.h>
+	<GL/glut.h>
+
+1270457804 c:\sdks\of0061\libs\glut\include\glut.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1270457804 c:\sdks\of0061\libs\freeimage\include\freeimage.h
+	<wchar.h>
+	<inttypes.h>
+
+1270457822 c:\sdks\of0061\libs\openframeworks\sound\ofsoundstream.h
+	"ofConstants.h"
+	"ofBaseApp.h"
+	"ofEvents.h"
+	"ofMath.h"
+
+1270457822 c:\sdks\of0061\libs\openframeworks\sound\ofsoundplayer.h
+	"ofConstants.h"
+	"fmod.h"
+	"fmod_errors.h"
+
+1270457908 c:\sdks\of0061\libs\fmodex\include\fmod.h
+	"fmod_codec.h"
+	"fmod_dsp.h"
+	"fmod_memoryinfo.h"
+
+1270457909 c:\sdks\of0061\libs\fmodex\include\fmod_codec.h
+
+1270457908 c:\sdks\of0061\libs\fmodex\include\fmod_dsp.h
+
+1270457909 c:\sdks\of0061\libs\fmodex\include\fmod_memoryinfo.h
+
+1270457907 c:\sdks\of0061\libs\fmodex\include\fmod_errors.h
+	"fmod.h"
+
+1270457829 c:\sdks\of0061\libs\openframeworks\video\ofvideograbber.h
+	"ofConstants.h"
+	"ofTexture.h"
+	"ofGraphics.h"
+	"ofTypes.h"
+	"ofQtUtils.h"
+	"videoInput.h"
+	"ofUCUtils.h"
+	"ofGstUtils.h"
+
+1270457830 c:\sdks\of0061\libs\openframeworks\video\ofqtutils.h
+	"ofConstants.h"
+	"ofGraphics.h"
+	<QuickTime/QuickTime.h>
+	<CoreServices/CoreServices.h>
+	<ApplicationServices/ApplicationServices.h>
+	<QTML.h>
+	<FixMath.h>
+	<QuickTimeComponents.h>
+	<TextUtils.h>
+	<MediaHandlers.h>
+
+1270457872 c:\sdks\of0061\libs\quicktime\include\qtml.h
+	<MacTypes.h>
+	<MacMemory.h>
+	<MacWindows.h>
+	<OSUtils.h>
+	<Files.h>
+
+1270457839 c:\sdks\of0061\libs\quicktime\include\mactypes.h
+	<ConditionalMacros.h>
+
+1270457846 c:\sdks\of0061\libs\quicktime\include\conditionalmacros.h
+
+1270457889 c:\sdks\of0061\libs\quicktime\include\macmemory.h
+	<MacTypes.h>
+	<MixedMode.h>
+
+1270457847 c:\sdks\of0061\libs\quicktime\include\mixedmode.h
+	<MacTypes.h>
+
+1270457863 c:\sdks\of0061\libs\quicktime\include\macwindows.h
+	<MacTypes.h>
+	<Aliases.h>
+	<AppleEvents.h>
+	<Collections.h>
+	<Drag.h>
+	<Events.h>
+	<Menus.h>
+	<MixedMode.h>
+	<QDOffscreen.h>
+	<Quickdraw.h>
+	<TextCommon.h>
+	<Icons.h>
+	<MacErrors.h>
+
+1270457893 c:\sdks\of0061\libs\quicktime\include\aliases.h
+	<MacTypes.h>
+	<AppleTalk.h>
+	<Files.h>
+
+1270457865 c:\sdks\of0061\libs\quicktime\include\appletalk.h
+	<MacTypes.h>
+	<OSUtils.h>
+
+1270457895 c:\sdks\of0061\libs\quicktime\include\osutils.h
+	<MacTypes.h>
+	<MixedMode.h>
+	<MacMemory.h>
+	<Patches.h>
+	<DateTimeUtils.h>
+	<Endian.h>
+
+1270457895 c:\sdks\of0061\libs\quicktime\include\patches.h
+	<MacTypes.h>
+
+1270457878 c:\sdks\of0061\libs\quicktime\include\datetimeutils.h
+	<ConditionalMacros.h>
+	<MacTypes.h>
+
+1270457838 c:\sdks\of0061\libs\quicktime\include\endian.h
+	<ConditionalMacros.h>
+	<MacTypes.h>
+
+1270457841 c:\sdks\of0061\libs\quicktime\include\files.h
+	<MacTypes.h>
+	<MixedMode.h>
+	<OSUtils.h>
+	<TextCommon.h>
+	<UTCUtils.h>
+	<Finder.h>
+
+1270457906 c:\sdks\of0061\libs\quicktime\include\textcommon.h
+	<MacTypes.h>
+
+1270457906 c:\sdks\of0061\libs\quicktime\include\utcutils.h
+	<MacTypes.h>
+	<MacErrors.h>
+
+1270457885 c:\sdks\of0061\libs\quicktime\include\macerrors.h
+	<ConditionalMacros.h>
+
+1270457839 c:\sdks\of0061\libs\quicktime\include\finder.h
+	<MacTypes.h>
+
+1270457869 c:\sdks\of0061\libs\quicktime\include\appleevents.h
+	<MacTypes.h>
+	<MixedMode.h>
+	<Notification.h>
+	<Events.h>
+	<AEDataModel.h>
+
+1270457858 c:\sdks\of0061\libs\quicktime\include\notification.h
+	<MacTypes.h>
+	<OSUtils.h>
+
+1270457867 c:\sdks\of0061\libs\quicktime\include\events.h
+	<OSUtils.h>
+	<Quickdraw.h>
+	<MacTypes.h>
+	<Endian.h>
+
+1270457882 c:\sdks\of0061\libs\quicktime\include\quickdraw.h
+	<Components.h>
+	<MacTypes.h>
+	<MixedMode.h>
+	<QuickdrawText.h>
+
+1270457887 c:\sdks\of0061\libs\quicktime\include\components.h
+	<MacErrors.h>
+	<MacTypes.h>
+	<MixedMode.h>
+
+1270457855 c:\sdks\of0061\libs\quicktime\include\quickdrawtext.h
+	<MacTypes.h>
+	<MixedMode.h>
+
+1270457863 c:\sdks\of0061\libs\quicktime\include\aedatamodel.h
+	<MacTypes.h>
+	<MixedMode.h>
+
+1270457877 c:\sdks\of0061\libs\quicktime\include\collections.h
+	<MacTypes.h>
+	<MixedMode.h>
+
+1270457857 c:\sdks\of0061\libs\quicktime\include\drag.h
+	<MacTypes.h>
+	<Events.h>
+	<Files.h>
+	<AppleEvents.h>
+	<Quickdraw.h>
+
+1270457858 c:\sdks\of0061\libs\quicktime\include\menus.h
+	<MacTypes.h>
+	<Events.h>
+	<Quickdraw.h>
+	<Fonts.h>
+	<TextCommon.h>
+	<Processes.h>
+	<AppleEvents.h>
+	<Collections.h>
+	<MacErrors.h>
+
+1270457906 c:\sdks\of0061\libs\quicktime\include\fonts.h
+	<MacTypes.h>
+	<Files.h>
+	<Quickdraw.h>
+	<TextCommon.h>
+	<MacErrors.h>
+
+1270457851 c:\sdks\of0061\libs\quicktime\include\processes.h
+	<MacTypes.h>
+	<Events.h>
+	<Files.h>
+
+1270457871 c:\sdks\of0061\libs\quicktime\include\qdoffscreen.h
+	<MacErrors.h>
+	<Quickdraw.h>
+
+1270457906 c:\sdks\of0061\libs\quicktime\include\icons.h
+	<MacTypes.h>
+	<Quickdraw.h>
+	<Files.h>
+	<CodeFragments.h>
+
+1270457862 c:\sdks\of0061\libs\quicktime\include\codefragments.h
+	<MacTypes.h>
+	<Files.h>
+
+1270457846 c:\sdks\of0061\libs\quicktime\include\fixmath.h
+	<MacTypes.h>
+
+1270457886 c:\sdks\of0061\libs\quicktime\include\quicktimecomponents.h
+	<MacTypes.h>
+	<MixedMode.h>
+	<Components.h>
+	<ImageCompression.h>
+	<Movies.h>
+	<Quickdraw.h>
+	<Video.h>
+	<Sound.h>
+	<QuickTimeMusic.h>
+
+1270457889 c:\sdks\of0061\libs\quicktime\include\imagecompression.h
+	<MacTypes.h>
+	<Quickdraw.h>
+	<QDOffscreen.h>
+	<Components.h>
+	<StandardFile.h>
+
+1270457856 c:\sdks\of0061\libs\quicktime\include\standardfile.h
+	<MacTypes.h>
+	<Dialogs.h>
+	<Files.h>
+
+1270457842 c:\sdks\of0061\libs\quicktime\include\dialogs.h
+	<MacTypes.h>
+	<MixedMode.h>
+	<Events.h>
+	<MacWindows.h>
+	<TextEdit.h>
+	<Controls.h>
+	<MacErrors.h>
+
+1270457842 c:\sdks\of0061\libs\quicktime\include\textedit.h
+	<MacTypes.h>
+	<Quickdraw.h>
+	<MixedMode.h>
+
+1270457902 c:\sdks\of0061\libs\quicktime\include\controls.h
+	<MacTypes.h>
+	<Quickdraw.h>
+	<Menus.h>
+	<TextEdit.h>
+	<Drag.h>
+	<Icons.h>
+	<Collections.h>
+	<MacErrors.h>
+
+1270457888 c:\sdks\of0061\libs\quicktime\include\movies.h
+	<Quickdraw.h>
+	<Aliases.h>
+	<Events.h>
+	<Menus.h>
+	<Components.h>
+	<ImageCompression.h>
+
+1270457895 c:\sdks\of0061\libs\quicktime\include\video.h
+	<Quickdraw.h>
+
+1270457891 c:\sdks\of0061\libs\quicktime\include\sound.h
+	<MacTypes.h>
+	<Dialogs.h>
+	<Components.h>
+	<MixedMode.h>
+	<Movies.h>
+
+1270457867 c:\sdks\of0061\libs\quicktime\include\quicktimemusic.h
+	<Components.h>
+	<ImageCompression.h>
+	<Movies.h>
+	<Quickdraw.h>
+	<Video.h>
+	<MacMemory.h>
+	<Sound.h>
+	<Endian.h>
+
+1270457852 c:\sdks\of0061\libs\quicktime\include\textutils.h
+	<MacTypes.h>
+	<NumberFormatting.h>
+	<StringCompare.h>
+	<DateTimeUtils.h>
+
+1270457898 c:\sdks\of0061\libs\quicktime\include\numberformatting.h
+	<ConditionalMacros.h>
+	<MacTypes.h>
+	<IntlResources.h>
+
+1270457856 c:\sdks\of0061\libs\quicktime\include\intlresources.h
+	<MacTypes.h>
+
+1270457833 c:\sdks\of0061\libs\quicktime\include\stringcompare.h
+	<MacTypes.h>
+	<TextCommon.h>
+	<Script.h>
+
+1270457835 c:\sdks\of0061\libs\quicktime\include\script.h
+	<MacTypes.h>
+	<Quickdraw.h>
+	<IntlResources.h>
+	<Events.h>
+
+1270457839 c:\sdks\of0061\libs\quicktime\include\mediahandlers.h
+	<ConditionalMacros.h>
+	<MacTypes.h>
+	<Components.h>
+	<Movies.h>
+	<Sound.h>
+
+1270457805 c:\sdks\of0061\libs\videoinput\include\videoinput.h
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+	<string.h>
+	<wchar.h>
+	<windows.h>
+
+1270457829 c:\sdks\of0061\libs\openframeworks\video\ofucutils.h
+	"ofConstants.h"
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	<unicap.h>
+	<unistd.h>
+	<string.h>
+	<pthread.h>
+
+1270457829 c:\sdks\of0061\libs\openframeworks\video\ofgstutils.h
+	<gst/gst.h>
+	<pthread.h>
+	"ofConstants.h"
+
+1270457828 c:\sdks\of0061\libs\openframeworks\video\ofvideoplayer.h
+	"ofConstants.h"
+	"ofTexture.h"
+	"ofGstUtils.h"
+	"ofQtUtils.h"
+
+1273647166 source:\\vmware-host\shared folders\parascopeviewergl\src\main.cpp
+	"ofMain.h"
+	"ofAppGlutWindow.h"
+	"PVGL.h"
+
+1273639350 \\vmware-host\shared folders\parascopeviewergl\src\sensor.h
+
+1273639456 source:\\vmware-host\shared folders\parascopeviewergl\src\sensor.cpp
+	"ofSerial.h"
+	"Sensor.h"
+
+1225124944 c:\sdks\of0061\addons\ofx3dutils\src\ofxcamera.h
+	"ofMain.h"
+	"ofxVectorMath.h"
+
+1270458067 c:\sdks\of0061\addons\ofxvectormath\src\ofxvectormath.h
+	"ofxVec2f.h"
+	"ofxVec3f.h"
+	"ofxVec4f.h"
+	"ofxMatrix3x3.h"
+	"ofxMatrix4x4.h"
+	"ofxQuaternion.h"
+
+1270458069 c:\sdks\of0061\addons\ofxvectormath\src\ofxvec2f.h
+	"ofConstants.h"
+	"ofTypes.h"
+
+1270458068 c:\sdks\of0061\addons\ofxvectormath\src\ofxvec3f.h
+	"ofConstants.h"
+	"ofTypes.h"
+
+1270458069 c:\sdks\of0061\addons\ofxvectormath\src\ofxvec4f.h
+	"ofConstants.h"
+	"ofTypes.h"
+
+1270458069 c:\sdks\of0061\addons\ofxvectormath\src\ofxmatrix3x3.h
+
+1270458068 c:\sdks\of0061\addons\ofxvectormath\src\ofxmatrix4x4.h
+	"ofxVec3f.h"
+	"ofxVec4f.h"
+	"ofxQuaternion.h"
+	<cmath>
+
+1270458068 c:\sdks\of0061\addons\ofxvectormath\src\ofxquaternion.h
+	"ofxVec3f.h"
+	"ofxVec4f.h"
+	<cmath>
+
+1232295510 source:\\vmware-host\shared folders\parascopeviewergl\src\ofx3dutils\ofx3dgraphics.cpp
+	"ofx3DGraphics.h"
+
+1232294956 \\vmware-host\shared folders\parascopeviewergl\src\ofx3dutils\ofx3dgraphics.h
+	"ofMain.h"
+	"ofxVec3f.h"
+
+1271083195 source:\\vmware-host\shared folders\parascopeviewergl\src\ofx3dutils\ofxcamera.cpp
+	"ofxCamera.h"
+
+1225124944 \\vmware-host\shared folders\parascopeviewergl\src\ofx3dutils\ofxcamera.h
+	"ofMain.h"
+	"ofxVectorMath.h"
+
+1232294758 source:\\vmware-host\shared folders\parascopeviewergl\src\ofx3dutils\ofxlight.cpp
+	"ofxLight.h"
+
+1231883402 \\vmware-host\shared folders\parascopeviewergl\src\ofx3dutils\ofxlight.h
+	"ofMain.h"
+
+1270458066 source:\\vmware-host\shared folders\parascopeviewergl\src\ofxvectormath\ofxmatrix3x3.cpp
+	"ofxMatrix3x3.h"
+
+1270458069 \\vmware-host\shared folders\parascopeviewergl\src\ofxvectormath\ofxmatrix3x3.h
+
+1270458066 source:\\vmware-host\shared folders\parascopeviewergl\src\ofxvectormath\ofxmatrix4x4.cpp
+	"ofxMatrix4x4.h"
+	<limits>
+	<stdlib.h>
+
+1270458068 \\vmware-host\shared folders\parascopeviewergl\src\ofxvectormath\ofxmatrix4x4.h
+	"ofxVec3f.h"
+	"ofxVec4f.h"
+	"ofxQuaternion.h"
+	<cmath>
+
+1270458068 \\vmware-host\shared folders\parascopeviewergl\src\ofxvectormath\ofxvec3f.h
+	"ofConstants.h"
+	"ofTypes.h"
+
+1270458069 \\vmware-host\shared folders\parascopeviewergl\src\ofxvectormath\ofxvec4f.h
+	"ofConstants.h"
+	"ofTypes.h"
+
+1270458068 \\vmware-host\shared folders\parascopeviewergl\src\ofxvectormath\ofxquaternion.h
+	"ofxVec3f.h"
+	"ofxVec4f.h"
+	<cmath>
+
+1270458067 source:\\vmware-host\shared folders\parascopeviewergl\src\ofxvectormath\ofxquaternion.cpp
+	<stdio.h>
+	"ofxQuaternion.h"
+	"ofxMatrix4x4.h"
+
+1270458004 c:\sdks\of0061\libs\poco\include\poco\dom\domparser.h
+	"Poco/XML/XML.h"
+	"Poco/SAX/SAXParser.h"
+
+1270458031 c:\sdks\of0061\libs\poco\include\poco\xml\xml.h
+	"Poco/Foundation.h"
+
+1270457956 c:\sdks\of0061\libs\poco\include\poco\sax\saxparser.h
+	"Poco/XML/XML.h"
+	"Poco/SAX/XMLReader.h"
+	"Poco/XML/ParserEngine.h"
+
+1270457955 c:\sdks\of0061\libs\poco\include\poco\sax\xmlreader.h
+	"Poco/XML/XML.h"
+	"Poco/XML/XMLString.h"
+
+1270458032 c:\sdks\of0061\libs\poco\include\poco\xml\xmlstring.h
+	"Poco/XML/XML.h"
+
+1270458034 c:\sdks\of0061\libs\poco\include\poco\xml\parserengine.h
+	"Poco/XML/XML.h"
+	"Poco/XML/expat.h"
+	"Poco/XML/XMLString.h"
+	"Poco/XML/XMLStream.h"
+	"Poco/SAX/Locator.h"
+	"Poco/TextEncoding.h"
+	<map>
+	<vector>
+
+1270458032 c:\sdks\of0061\libs\poco\include\poco\xml\expat.h
+	<stdlib.h>
+	"expat_external.h"
+
+1270458034 c:\sdks\of0061\libs\poco\include\poco\xml\expat_external.h
+
+1270458032 c:\sdks\of0061\libs\poco\include\poco\xml\xmlstream.h
+	"Poco/XML/XML.h"
+	<istream>
+	<ostream>
+
+1270457955 c:\sdks\of0061\libs\poco\include\poco\sax\locator.h
+	"Poco/XML/XML.h"
+	"Poco/XML/XMLString.h"
+
+1270457917 c:\sdks\of0061\libs\poco\include\poco\textencoding.h
+	"Poco/Foundation.h"
+	"Poco/SharedPtr.h"
+
+1270458001 c:\sdks\of0061\libs\poco\include\poco\dom\document.h
+	"Poco/XML/XML.h"
+	"Poco/DOM/AbstractContainerNode.h"
+	"Poco/DOM/DocumentEvent.h"
+	"Poco/XML/XMLString.h"
+	"Poco/XML/NamePool.h"
+	"Poco/AutoReleasePool.h"
+
+1270457998 c:\sdks\of0061\libs\poco\include\poco\dom\abstractcontainernode.h
+	"Poco/XML/XML.h"
+	"Poco/DOM/AbstractNode.h"
+
+1270457994 c:\sdks\of0061\libs\poco\include\poco\dom\abstractnode.h
+	"Poco/XML/XML.h"
+	"Poco/DOM/Node.h"
+	"Poco/DOM/MutationEvent.h"
+	"Poco/XML/XMLString.h"
+
+1270457997 c:\sdks\of0061\libs\poco\include\poco\dom\node.h
+	"Poco/XML/XML.h"
+	"Poco/DOM/EventTarget.h"
+	"Poco/XML/XMLString.h"
+
+1270457999 c:\sdks\of0061\libs\poco\include\poco\dom\eventtarget.h
+	"Poco/XML/XML.h"
+	"Poco/DOM/DOMObject.h"
+	"Poco/XML/XMLString.h"
+
+1270457995 c:\sdks\of0061\libs\poco\include\poco\dom\domobject.h
+	"Poco/XML/XML.h"
+
+1270458000 c:\sdks\of0061\libs\poco\include\poco\dom\mutationevent.h
+	"Poco/XML/XML.h"
+	"Poco/DOM/Event.h"
+
+1270458003 c:\sdks\of0061\libs\poco\include\poco\dom\event.h
+	"Poco/XML/XML.h"
+	"Poco/XML/XMLString.h"
+	"Poco/DOM/DOMObject.h"
+
+1270457994 c:\sdks\of0061\libs\poco\include\poco\dom\documentevent.h
+	"Poco/XML/XML.h"
+	"Poco/XML/XMLString.h"
+
+1270458033 c:\sdks\of0061\libs\poco\include\poco\xml\namepool.h
+	"Poco/XML/XML.h"
+	"Poco/XML/XMLString.h"
+	"Poco/XML/Name.h"
+
+1270458033 c:\sdks\of0061\libs\poco\include\poco\xml\name.h
+	"Poco/XML/XML.h"
+	"Poco/XML/XMLString.h"
+
+1270457930 c:\sdks\of0061\libs\poco\include\poco\autoreleasepool.h
+	"Poco/Foundation.h"
+	<list>
+
+1270458000 c:\sdks\of0061\libs\poco\include\poco\dom\nodeiterator.h
+	"Poco/XML/XML.h"
+
+1270457997 c:\sdks\of0061\libs\poco\include\poco\dom\nodefilter.h
+	"Poco/XML/XML.h"
+	"Poco/XML/XMLString.h"
+
+1270457998 c:\sdks\of0061\libs\poco\include\poco\dom\autoptr.h
+	"Poco/XML/XML.h"
+	"Poco/AutoPtr.h"
+
+1270457954 c:\sdks\of0061\libs\poco\include\poco\sax\inputsource.h
+	"Poco/XML/XML.h"
+	"Poco/XML/XMLString.h"
+	"Poco/XML/XMLStream.h"
+
+1270458052 c:\sdks\of0061\addons\ofxxmlsettings\src\ofxxmlsettings.h
+	"ofMain.h"
+	<string.h>
+	"tinyxml.h"
+
+1270458051 c:\sdks\of0061\addons\ofxxmlsettings\libs\tinyxml.h
+	<ctype.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	<string>
+	<iostream>
+	<sstream>
+	"tinystr.h"
+
+1270458052 source:c:\sdks\of0061\addons\ofxxmlsettings\libs\tinyxmlerror.cpp
+	"tinyxml.h"
+
+1270458051 source:c:\sdks\of0061\addons\ofxxmlsettings\libs\tinyxmlparser.cpp
+	<ctype.h>
+	<stddef.h>
+	"tinyxml.h"
+	<windows.h>
+
+1270458052 source:c:\sdks\of0061\addons\ofxxmlsettings\src\ofxxmlsettings.cpp
+	"ofxXmlSettings.h"
+	<vector>
+	<string>
+	<iostream>
+
+1270458051 source:c:\sdks\of0061\addons\ofxxmlsettings\libs\tinyxml.cpp
+	<ctype.h>
+	<sstream>
+	<iostream>
+	"tinyxml.h"
+
+1270713701 source:c:\parascopeviewergl\src\main.cpp
+	"ofMain.h"
+	"testApp.h"
+	"ofAppGlutWindow.h"
+
+1273134826 c:\parascopeviewergl\src\testapp.h
+	"ofMain.h"
+	"ofxXMLSettings.h"
+
+1272976875 source:c:\parascopeviewergl\src\testapp.cpp
+	"testApp.h"
+
+1271322878 source:c:\parascopeviewergl\src\sensor.cpp
+	"ofSerial.h"
+	"Sensor.h"
+
+1271321583 c:\parascopeviewergl\src\sensor.h
+
+1273639456 source:z:\parascopeviewergl\src\sensor.cpp
+	"ofSerial.h"
+	"Sensor.h"
+
+1273639350 z:\parascopeviewergl\src\sensor.h
+
+1273647166 source:z:\parascopeviewergl\src\main.cpp
+	"ofMain.h"
+	"ofAppGlutWindow.h"
+	"PVGL.h"
+
+1273146162 z:\parascopeviewergl\src\testapp.h
+	"ofMain.h"
+	"Sensor.h"
+	"ofxXMLSettings.h"
+
+1273146375 source:z:\parascopeviewergl\src\testapp.cpp
+	"testApp.h"
+
+1274695930 source:z:\parascopeviewergl\src\pvgl.cpp
+	"PVGL.h"
+
+1274691576 z:\parascopeviewergl\src\pvgl.h
+	"ofMain.h"
+	"Sensor.h"
+	"ofxDirList.h"
+	"PVGLAdmin.h"
+	"PVGLImageLoader.h"
+
+1273676111 \\vmware-host\shared folders\parascopeviewergl\src\pvgl.h
+	"ofMain.h"
+	"Sensor.h"
+	"ofxDirList.h"
+	"PVGLAdmin.h"
+
+1273734082 source:\\vmware-host\shared folders\parascopeviewergl\src\pvgl.cpp
+	"PVGL.h"
+
+1273657637 \\vmware-host\shared folders\parascopeviewergl\src\pvgladmin.h
+	"Sensor.h"
+	"ofxXMLSettings.h"
+	<stdio.h>
+
+1273667277 source:\\vmware-host\shared folders\parascopeviewergl\src\pvgladmin.cpp
+	"PVGLAdmin.h"
+
+1270458042 source:c:\sdks\of0061\addons\ofxdirlist\src\ofxdirlist.cpp
+	"ofxDirList.h"
+	<algorithm>
+	<string>
+
+1270458042 c:\sdks\of0061\addons\ofxdirlist\src\ofxdirlist.h
+	"ofMain.h"
+	<stdio.h>
+	<iostream>
+	<string.h>
+	<dirent.h>
+	<windows.h>
+	<tchar.h>
+	<string.h>
+	<assert.h>
+
+1273667277 source:z:\parascopeviewergl\src\pvgladmin.cpp
+	"PVGLAdmin.h"
+
+1273657637 z:\parascopeviewergl\src\pvgladmin.h
+	"Sensor.h"
+	"ofxXMLSettings.h"
+	<stdio.h>
+
+1270458056 source:c:\sdks\of0061\addons\ofxthread\src\ofxthread.cpp
+	"ofxThread.h"
+
+1270458055 c:\sdks\of0061\addons\ofxthread\src\ofxthread.h
+	"ofConstants.h"
+	<process.h>
+	<pthread.h>
+	<semaphore.h>
+
+1274693548 z:\parascopeviewergl\src\pvglimageloader.h
+	"ofMain.h"
+	"ofxThread.h"
+
+1274695272 source:z:\parascopeviewergl\src\pvglimageloader.cpp
+	"PVGLImageLoader.h"
+
