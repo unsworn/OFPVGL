@@ -5,7 +5,7 @@
 		<Option title="ParascopeViewerGL" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="addons\;src\;addons\ofxXmlSettings\;addons\ofxXmlSettings\src\;addons\ofxXmlSettings\libs\;addons\ofxDirList\;addons\ofxDirList\src\;" />
+		<Option virtualFolders="addons\;src\;addons\ofxXmlSettings\;addons\ofxXmlSettings\src\;addons\ofxXmlSettings\libs\;addons\ofxDirList\;addons\ofxDirList\src\;addons\ofxThread\;addons\ofxThread\src\;" />
 		<Build>
 			<Target title="release">
 				<Option output="bin\$(PROJECT_NAME)" prefix_auto="1" extension_auto="1" />
@@ -63,6 +63,7 @@
 			<Add directory="C:\SDKs\OF0061\addons\ofxXmlSettings\libs" />
 			<Add directory="C:\SDKs\OF0061\addons\ofxXmlSettings\src" />
 			<Add directory="C:\SDKs\OF0061\addons\ofxDirList\src" />
+			<Add directory="C:\SDKs\OF0061\addons\ofxThread\src" />
 		</Compiler>
 		<Linker>
 			<Add option="C:/SDKs/OF0061/libs/FreeImage/lib/win_cb/FreeImage.lib" />
@@ -100,6 +101,12 @@
 		<Unit filename="C:\SDKs\OF0061\addons\ofxDirList\src\ofxDirList.h">
 			<Option virtualFolder="addons\ofxDirList\src\" />
 		</Unit>
+		<Unit filename="C:\SDKs\OF0061\addons\ofxThread\src\ofxThread.cpp">
+			<Option virtualFolder="addons\ofxThread\src\" />
+		</Unit>
+		<Unit filename="C:\SDKs\OF0061\addons\ofxThread\src\ofxThread.h">
+			<Option virtualFolder="addons\ofxThread\src\" />
+		</Unit>
 		<Unit filename="C:\SDKs\OF0061\addons\ofxXmlSettings\libs\tinyxml.cpp">
 			<Option virtualFolder="addons\ofxXmlSettings\libs\" />
 		</Unit>
@@ -128,6 +135,12 @@
 			<Option virtualFolder="src\" />
 		</Unit>
 		<Unit filename="src\PVGLAdmin.h">
+			<Option virtualFolder="src\" />
+		</Unit>
+		<Unit filename="src\PVGLImageLoader.cpp">
+			<Option virtualFolder="src\" />
+		</Unit>
+		<Unit filename="src\PVGLImageLoader.h">
 			<Option virtualFolder="src\" />
 		</Unit>
 		<Unit filename="src\Sensor.cpp">
